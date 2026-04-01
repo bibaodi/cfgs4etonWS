@@ -1,10 +1,19 @@
+#!/bin/bash
+
+set -e
+
+_FILE_DIR=$(dirname "$(readlink -f "$0")")
+_colorLib="${_FILE_DIR}/../../scripts-bash/03-color-msg.sh"
+chmod +x ${_colorLib}
+source ${_colorLib}
+
 function listConfigs(){
-	echo "list all configs"
+	GREEN_MSG "\nlist all configs\n"
 	git config list
 }
 
 listConfigs;
 
-echo "set auto upsteam"
+RED_MSG "set auto upsteam"
 git config push.autoSetupRemote true
 listConfigs;
