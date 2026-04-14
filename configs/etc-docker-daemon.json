@@ -1,0 +1,18 @@
+{
+    "data-root": "/mnt/datas/11-docker-home/dockerd",
+    "registry-mirrors": [
+        "https://docker.1ms.run",
+        "https://hub.rat.dev",
+        "https://dockerproxy.net",
+        "https://docker.m.daocloud.io",
+        "https://registry.docker-cn.com",
+        "http://hub-mirror.c.163.com",
+        "https://docker.xuanyuan.me"
+    ],
+    "runtimes": {
+        "nvidia": {
+            "args": [],
+            "path": "nvidia-container-runtime"
+        }
+    }
+}
