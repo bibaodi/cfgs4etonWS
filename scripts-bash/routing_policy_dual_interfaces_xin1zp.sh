@@ -43,3 +43,17 @@ echo ""
 echo "Active default route: $ACTIVE_DEFAULT"
 echo "Internet traffic will use the route with the lowest metric (100 → $WIFI_IF)"
 echo "If $WIFI_IF fails, the kernel automatically switches to metric 700 ($ETH_IF)"
+
+:<<'comment'
+$ ip route show
+default via 192.168.178.254 dev wlp3s0 src 192.168.178.196 metric 100
+default via 192.168.0.1 dev eth0 metric 700
+172.16.233.0/24 dev vmnet1 proto kernel scope link src 172.16.233.1
+172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 linkdown
+192.168.0.0/24 dev eth0 scope link src 192.168.0.138 metric 100
+192.168.0.0/16 dev eth0 scope link metric 100
+192.168.168.0/24 dev vmnet8 proto kernel scope link src 192.168.168.1
+192.168.178.0/24 dev wlp3s0 proto kernel scope link src 192.168.178.196 metric 600
+comment
+
+
