@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "images-bin-matcher"
+version = "0.1.0"
+description = "Match subfolder pairs across two directories using SSIM of probe images."
+requires-python = ">=3.10"
+dependencies = [
+    "scikit-image",
+    "numpy",
+    "Pillow",
+    "opencv-python",
+]
+
+[project.scripts]
+images-bin-matcher = "images_bin_matcher.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["images_bin_matcher*"]

@@ -1,0 +1,13 @@
+LABELME LABEL FINDER RESULTS
+============================================================
+
+Base path: /mnt/datas/42workspace/34-project_ML_data_models_UltrasoundIntelligence/00-scripts4ai_ML/data-process/labelFinder_labelme
+Total unique labels found: 0
+
+Base folders containing JSON files:
+
+Unique labels (sorted alphabetically):
+
+First occurrence of each label:
+
+No errors encountered during processing.
