@@ -48,6 +48,7 @@ main() {
         echo "Upload completed. ACL set to public-read."
         # Optionally print public URL
         echo "Public URL: https://yingling-s3test.s3.amazonaws.com/Models/models_infomations.json"
+	echo "https://yingling-s3test.s3.cn-north-1.amazonaws.com.cn/Models/models_infomations.json"
     else
         echo "Aborted."
         exit 0
