@@ -3,6 +3,7 @@ set -e  # exit on error
 
 # Configuration
 S3_FOLDER="s3://yingling-s3test/Models/"
+_region="cn-north-1"
 AUTHOR="${USER:-unknown}"
 VERSION="1.0"
 
@@ -53,7 +54,7 @@ main() {
         local key_prefix
         bucket=$(echo "$S3_FOLDER" | sed -E 's|^s3://([^/]+)/.*|\1|')
         key_prefix=$(echo "$S3_FOLDER" | sed -E 's|^s3://[^/]+/||')
-        echo "Public URL: https://$bucket.s3.amazonaws.com/${key_prefix}${filename}"
+        echo "Public URL: https://$bucket.s3.${_region}.amazonaws.com.cn/${key_prefix}${filename}"
     else
         echo "Aborted."
         exit 0

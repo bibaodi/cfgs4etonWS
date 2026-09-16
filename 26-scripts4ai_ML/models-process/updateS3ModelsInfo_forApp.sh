@@ -6,7 +6,8 @@ set -e  # exit on error
 
 
 # Configuration
-S3_DEST="s3://yingling-s3test/Models/models_infomations.json"
+_dst_filename='models_information.json'
+S3_DEST="s3://yingling-s3test/Models/${_dst_filename}"
 AUTHOR="${USER:-unknown}"
 VERSION="1.0"
 
@@ -47,8 +48,8 @@ main() {
         upload_file "$src" "$S3_DEST"
         echo "Upload completed. ACL set to public-read."
         # Optionally print public URL
-        echo "Public URL: https://yingling-s3test.s3.amazonaws.com/Models/models_infomations.json"
-	echo "https://yingling-s3test.s3.cn-north-1.amazonaws.com.cn/Models/models_infomations.json"
+        echo "Public URL: https://yingling-s3test.s3.amazonaws.com/Models/${_dst_filename}"
+	echo "https://yingling-s3test.s3.cn-north-1.amazonaws.com.cn/Models/${_dst_filename}"
     else
         echo "Aborted."
         exit 0
