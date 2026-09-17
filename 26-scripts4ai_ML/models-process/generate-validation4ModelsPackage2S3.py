@@ -513,6 +513,17 @@ class ModelsInfoBuilder:
             json.dump(entries, f, indent=2, ensure_ascii=False)
         return out_path, entry
 
+def create_readme_file(folder_path, version, update_msg):
+    """Create a README.txt file in the folder with version and update message."""
+    readme_path = folder_path / f"README.txt"
+    content = f"Model Package Version: {version}\n\nUpdate Notes:\n{update_msg}\n"
+    try:
+        with open(readme_path, "w", encoding="utf-8") as f:
+            f.write(content)
+        print(f"Created {readme_path} with update notes.")
+    except Exception as e:
+        print(f"ERROR: Failed to create README.txt: {e}")
+        sys.exit(1)
 
 def main():
     """Main function to handle CLI arguments and execute validation generation."""
@@ -613,6 +624,8 @@ Examples:
         sys.exit(1)
 
     generate_validation(folder_path)
+    update_msg = input("Update notes (changelog): ").strip()
+    create_readme_file(folder_path, next_version, update_msg)
 
     if not ask_yes_no("\nCreate zip package?"):
         print("Skipped zip package.")
@@ -626,8 +639,7 @@ Examples:
         print("Skipped manifest update.")
         return
 
-    update = input("Update notes (changelog): ").strip()
-    out_path, entry = builder.add_package(folder_path, zip_path, entries, update)
+    out_path, entry = builder.add_package(folder_path, zip_path, entries, update_msg)
     print(f"Wrote {out_path} (version_code={entry['version_code']})")
     print(f"Nothing uploaded - upload {zip_path.name} and {out_path.name} to S3 yourself.")
 
