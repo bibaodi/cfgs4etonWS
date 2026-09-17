@@ -7,6 +7,7 @@ set -e  # exit on error
 
 # Configuration
 _dst_filename='models_information.json'
+#_dst_filename='models_infomations.json'
 S3_DEST="s3://yingling-s3test/Models/${_dst_filename}"
 AUTHOR="${USER:-unknown}"
 VERSION="1.0"
