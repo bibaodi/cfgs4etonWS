@@ -44,6 +44,29 @@ def convert_math_syntax(file_path: str) -> None:
         content
     )
 
+    # 3. Convert display math: $$...$$ -> ```math\n...\n```
+    #    - Match only `$$` that stands ALONE on its own line:
+    #      `^\$\$[ \t]*$`. The line anchors (activated by re.MULTILINE) are
+    #      what prevent the regex from mis-pairing an inline `$$` inside a
+    #      code span — such as the phrase `` `$$` 数学块 `` in the intro —
+    #      with the next real display-math delimiter further down the file.
+    #      Without the anchors, the first (inline) `$$` pairs with the first
+    #      real delimiter, and every subsequent delimiter pair is shifted by
+    #      one, which is what produced the corrupted “``` before, ```math
+    #      after” swap in 3.md.
+    #    - re.MULTILINE makes `^` / `$` match at line boundaries; re.DOTALL
+    #      lets the captured body span newlines.
+    #    - `[ \t]*` (not `\s*`) keeps the match from swallowing the newline
+    #      itself, so the surrounding blank lines are preserved.
+    #    - Non-greedy `.*?` stops at the first closing `$$` line, so
+    #      consecutive blocks stay independent.
+    content = re.sub(
+        r'(?m)^\$\$[ \t]*$\n(.*?)\n^\$\$[ \t]*$',
+        lambda m: '```math\n' + m.group(1).rstrip() + '\n```',
+        content,
+        flags=re.DOTALL,
+    )
+
     path.write_text(content, encoding='utf-8')
     print(f"Successfully converted math syntax in '{file_path}'.")
 
